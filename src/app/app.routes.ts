@@ -11,6 +11,7 @@ import { CareerAmbassadorsPageComponent } from './pages/career-ambassadors/caree
 import { RegistrationPageComponent } from './pages/registration/registration-page.component';
 import { FormsThankYouPageComponent } from './pages/forms-thank-you/forms-thank-you-page.component';
 import { ResourcesPageComponent } from './pages/resources/resources-page.component';
+import { ContactPageComponent } from './pages/Contactpage/Contact';
 
 import { DesignSystemLiteComponent } from './pages/design-system-lite/design-system-lite.component';
 import { MobileResponsiveScreensComponent } from './pages/mobile-responsive-screens/mobile-responsive-screens.component';
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path: 'registration', component: RegistrationPageComponent },
   { path: 'forms-thank-you', component: FormsThankYouPageComponent },
   { path: 'resources', component: ResourcesPageComponent },
+  { path: 'contact', component: ContactPageComponent },
 
   { path: 'design-system-lite', component: DesignSystemLiteComponent },
   { path: 'mobile-responsive-screens', component: MobileResponsiveScreensComponent },

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 interface FooterLink {
   label: string;
@@ -35,25 +35,37 @@ interface FooterColumn {
 
           <div class="flex flex-col justify-end gap-4 lg:col-span-5">
             <p class="max-w-[560px] text-[14px] leading-relaxed text-[#525252] lg:text-[16px]">
-              Choose your pathway and continue to the right programme, service, resource or registration page.
+              Choose your pathway and continue to the right programme, service, resource, registration or contact page.
             </p>
 
-            <div class="relative w-full md:w-[320px]">
-              <select
-                class="footer-select"
-                aria-label="Select user type"
-              >
-                <option value="" disabled selected>I am</option>
-                <option value="student">A Student</option>
-                <option value="professional">A Professional</option>
-                <option value="partner">A Partner</option>
-                <option value="employer">An Employer</option>
-                <option value="ambassador">A Career Ambassador</option>
-              </select>
+            <div class="grid grid-cols-1 gap-3 md:grid-cols-[320px_1fr]">
+              <div class="relative w-full">
+                <select
+                  class="footer-select"
+                  aria-label="Select user type"
+                  (change)="redirectByUserType($event)"
+                >
+                  <option value="" disabled selected>I am</option>
+                  <option value="/registration">A Student</option>
+                  <option value="/jobs">A Professional</option>
+                  <option value="/contact">A Partner</option>
+                  <option value="/employers">An Employer</option>
+                  <option value="/career-ambassadors">A Career Ambassador</option>
+                </select>
 
-              <div class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#525252]">
-                ↓
+                <div class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#525252]">
+                  ↓
+                </div>
               </div>
+
+              <button
+                type="button"
+                routerLink="/contact"
+                class="footer-contact-link"
+              >
+                Contact Us
+                <span>→</span>
+              </button>
             </div>
           </div>
 
@@ -80,7 +92,23 @@ interface FooterColumn {
               German language training, employers, ambassadors and student services.
             </p>
 
-           
+            <div class="mt-7 flex flex-wrap gap-3">
+              <button
+                type="button"
+                routerLink="/registration"
+                class="mini-action"
+              >
+                Start Journey
+              </button>
+
+              <button
+                type="button"
+                routerLink="/contact"
+                class="mini-action mini-action-outline"
+              >
+                Contact Office
+              </button>
+            </div>
 
             <div class="mt-7 flex items-center gap-3">
               <a href="#" class="social-link" aria-label="LinkedIn">
@@ -114,14 +142,25 @@ interface FooterColumn {
                 </h3>
               </div>
 
-              <button
-                type="button"
-                routerLink="/registration"
-                class="footer-primary-link"
-              >
-                Start Registration
-                <span>→</span>
-              </button>
+              <div class="flex flex-col gap-3 sm:flex-row">
+                <button
+                  type="button"
+                  routerLink="/registration"
+                  class="footer-primary-link"
+                >
+                  Start Registration
+                  <span>→</span>
+                </button>
+
+                <button
+                  type="button"
+                  routerLink="/contact"
+                  class="footer-secondary-link"
+                >
+                  Contact Us
+                  <span>→</span>
+                </button>
+              </div>
             </div>
 
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -165,6 +204,10 @@ interface FooterColumn {
               Site map
             </a>
 
+            <a routerLink="/contact" class="bottom-link">
+              Contact
+            </a>
+
             <a href="#" class="bottom-link">
               Cookie Policy
             </a>
@@ -184,8 +227,14 @@ interface FooterColumn {
     </footer>
   `,
   styles: [`
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+
     .font-main {
       font-family: 'IBM Plex Sans', 'Inter', Arial, Helvetica, sans-serif;
+      font-feature-settings: 'liga' 1, 'kern' 1;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     .section-eyebrow {
@@ -218,6 +267,28 @@ interface FooterColumn {
       box-shadow: inset 0 0 0 1px #0f62fe;
     }
 
+    .footer-contact-link {
+      display: inline-flex;
+      height: 48px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border: 1px solid #0f62fe;
+      background: #ffffff;
+      padding: 0 18px;
+      color: #0f62fe;
+      font-size: 14px;
+      font-weight: 600;
+      transition:
+        background 0.18s ease,
+        color 0.18s ease;
+    }
+
+    .footer-contact-link:hover {
+      background: #0f62fe;
+      color: #ffffff;
+    }
+
     .brand-logo {
       display: inline-flex;
       align-items: baseline;
@@ -234,28 +305,34 @@ interface FooterColumn {
       color: #0f62fe;
     }
 
-    .metric-box {
-      min-height: 104px;
-      background: #ffffff;
-      padding: 18px;
-    }
-
-    .metric-value {
-      font-size: 30px;
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -0.05em;
-      color: #161616;
-    }
-
-    .metric-label {
-      margin-top: 12px;
-      font-size: 10px;
+    .mini-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      background: #0f62fe;
+      padding: 10px 16px;
+      color: #ffffff;
+      font-size: 13px;
       font-weight: 600;
-      line-height: 1.35;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #6f6f6f;
+      transition:
+        background 0.18s ease,
+        color 0.18s ease;
+    }
+
+    .mini-action:hover {
+      background: #0043ce;
+    }
+
+    .mini-action-outline {
+      border: 1px solid #0f62fe;
+      background: #ffffff;
+      color: #0f62fe;
+    }
+
+    .mini-action-outline:hover {
+      background: #0f62fe;
+      color: #ffffff;
     }
 
     .social-link {
@@ -279,21 +356,39 @@ interface FooterColumn {
       color: #ffffff;
     }
 
-    .footer-primary-link {
+    .footer-primary-link,
+    .footer-secondary-link {
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
       gap: 28px;
-      background: #0f62fe;
       padding: 14px 20px;
-      color: #ffffff;
       font-size: 14px;
       font-weight: 600;
-      transition: background 0.18s ease;
+      transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease;
+    }
+
+    .footer-primary-link {
+      background: #0f62fe;
+      color: #ffffff;
     }
 
     .footer-primary-link:hover {
       background: #0043ce;
+    }
+
+    .footer-secondary-link {
+      border: 1px solid #0f62fe;
+      background: #ffffff;
+      color: #0f62fe;
+    }
+
+    .footer-secondary-link:hover {
+      background: #0f62fe;
+      color: #ffffff;
     }
 
     .sitemap-column {
@@ -363,13 +458,18 @@ interface FooterColumn {
         padding: 12px 0;
       }
 
-      .footer-primary-link {
+      .footer-primary-link,
+      .footer-secondary-link,
+      .footer-contact-link,
+      .mini-action {
         width: 100%;
       }
     }
   `]
 })
 export class FooterComponent {
+  constructor(private router: Router) {}
+
   footerColumns: FooterColumn[] = [
     {
       title: 'Programmes',
@@ -408,8 +508,8 @@ export class FooterComponent {
           route: '/registration'
         },
         {
-          label: 'Forms Thank You',
-          route: '/forms-thank-you'
+          label: 'Contact',
+          route: '/contact'
         }
       ]
     },
@@ -442,12 +542,12 @@ export class FooterComponent {
           route: '/registration'
         },
         {
-          label: 'Explore Jobs',
-          route: '/jobs'
+          label: 'Contact Us',
+          route: '/contact'
         },
         {
-          label: 'Find Study Options',
-          route: '/study-abroad'
+          label: 'Explore Jobs',
+          route: '/jobs'
         },
         {
           label: 'Learn German',
@@ -456,4 +556,13 @@ export class FooterComponent {
       ]
     }
   ];
+
+  redirectByUserType(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    const route = select.value;
+
+    if (route) {
+      this.router.navigate([route]);
+    }
+  }
 }
