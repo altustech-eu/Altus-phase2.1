@@ -16,10 +16,16 @@ import { ContactPageComponent } from './pages/Contactpage/Contact';
 import { DesignSystemLiteComponent } from './pages/design-system-lite/design-system-lite.component';
 import { MobileResponsiveScreensComponent } from './pages/mobile-responsive-screens/mobile-responsive-screens.component';
 
+// Add this import
+import { LoginComponent } from '../app/components/mainsearch/Loginpage';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
   { path: 'home', component: HomePageComponent },
+
+  // Add this route
+  { path: 'login', component: LoginComponent },
 
   { path: 'ausbildung', component: AusbildungPageComponent },
   { path: 'jobs', component: JobsPageComponent },

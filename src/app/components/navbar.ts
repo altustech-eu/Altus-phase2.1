@@ -152,7 +152,11 @@ interface LanguageOption {
             </svg>
           </button>
 
-          <button class="h-full px-7 bg-[#0f62fe] text-white text-[14px] font-medium hover:bg-[#0043ce] transition-colors">
+          <!-- Desktop Apply Button -->
+          <button
+            class="h-full px-7 bg-[#0f62fe] text-white text-[14px] font-medium hover:bg-[#0043ce] transition-colors"
+            (click)="goToLogin()"
+          >
             Apply
           </button>
 
@@ -209,18 +213,19 @@ interface LanguageOption {
 
       </div>
 
-     <!-- Page Overlay When Dropdown Is Open -->
-@if (openMenu !== '' || isLanguageOpen || isMobileMenuOpen) {
-  <div
-    class="fixed left-0 right-0 top-[58px] bottom-0 bg-black/50 z-[9997] xl:hidden"
-    (click)="closeAllMenus()"
-  ></div>
+      <!-- Page Overlay When Dropdown Is Open -->
+      @if (openMenu !== '' || isLanguageOpen || isMobileMenuOpen) {
+        <div
+          class="fixed left-0 right-0 top-[58px] bottom-0 bg-black/50 z-[9997] xl:hidden"
+          (click)="closeAllMenus()"
+        ></div>
 
-  <div
-    class="fixed left-0 right-0 top-[50px] bottom-0 bg-black/50 z-[9997] hidden xl:block"
-    (click)="closeAllMenus()"
-  ></div>
-}
+        <div
+          class="fixed left-0 right-0 top-[50px] bottom-0 bg-black/50 z-[9997] hidden xl:block"
+          (click)="closeAllMenus()"
+        ></div>
+      }
+
       <!-- Mobile Language Dropdown -->
       @if (isLanguageOpen) {
         <div class="xl:hidden absolute top-[58px] right-5 md:right-8 w-[220px] bg-white border border-[#e0e0e0] shadow-[0_8px_20px_rgba(0,0,0,0.12)] z-[10002]">
@@ -278,7 +283,10 @@ interface LanguageOption {
             <button class="mobile-nav-item" (click)="closeAllMenus()">About</button>
 
             <div class="py-5">
-              <button class="w-full bg-[#0f62fe] text-white py-4 text-[15px] font-medium hover:bg-[#0043ce]">
+              <button
+                class="w-full bg-[#0f62fe] text-white py-4 text-[15px] font-medium hover:bg-[#0043ce]"
+                (click)="goToLogin()"
+              >
                 Apply Now
               </button>
             </div>
@@ -1114,6 +1122,11 @@ export class Nav {
     this.router.navigate(['/mainsearch']);
   }
 
+  goToLogin(): void {
+    this.closeAllMenus();
+    this.router.navigate(['/login']);
+  }
+
   toggleMenu(menu: MenuKey): void {
     this.isLanguageOpen = false;
 
@@ -1162,4 +1175,4 @@ export class Nav {
     this.selectedLanguage = language;
     this.isLanguageOpen = false;
   }
-}
+} 
