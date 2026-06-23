@@ -18,14 +18,17 @@ import { CommonModule } from '@angular/common';
         <div class="absolute bottom-0 top-0 left-[88%] border-l border-[#e0e0e0]"></div>
       </div>
 
+      <!-- Soft Blue Glass Background Glow -->
+      <div class="pointer-events-none absolute left-8 top-16 h-[180px] w-[180px] rounded-full bg-[#0f62fe]/10 blur-3xl"></div>
+
       <!-- Hero Container -->
       <div class="relative z-10 mx-auto grid min-h-[580px] max-w-[1584px] grid-cols-1 lg:grid-cols-12">
 
         <!-- Left Content -->
         <div class="flex flex-col justify-center border-b border-[#e0e0e0] px-6 py-12 lg:col-span-7 lg:border-b-0 lg:border-r lg:px-12 lg:py-16 xl:px-16 2xl:px-20">
 
-          <!-- Audience Switch -->
-          <div class="mb-8 inline-grid w-full max-w-[420px] grid-cols-2 border border-[#c6c6c6] bg-white">
+          <!-- Audience Switch - Smaller Glass Morphism Toggle -->
+          <div class="mb-7 inline-flex w-fit rounded-full border border-white/60 bg-white/35 p-1 shadow-[0_8px_30px_rgba(15,98,254,0.12)] backdrop-blur-xl">
             <button
               type="button"
               (click)="setMode('employer')"
@@ -38,7 +41,7 @@ import { CommonModule } from '@angular/common';
             <button
               type="button"
               (click)="setMode('employee')"
-              class="mode-tab border-l border-[#c6c6c6]"
+              class="mode-tab"
               [class.active-tab]="mode === 'employee'"
             >
               For Candidate
@@ -50,16 +53,21 @@ import { CommonModule } from '@angular/common';
           </p>
 
           <h1 class="mt-5 max-w-[920px] text-[44px] font-normal leading-[1.02] tracking-[-0.065em] text-[#161616] sm:text-[58px] lg:text-[60px] xl:text-[60px]">
-            Your career pathway for
+            {{ mode === 'employer' ? 'Build your global talent pipeline ' : 'Your career pathway for' }}
             <span class="block text-[#0f62fe]">
               Germany, Europe and Gulf
             </span>
           </h1>
 
           <p class="mt-7 max-w-[720px] text-[16px] leading-[1.75] text-[#525252] lg:text-[18px]">
-            Explore Ausbildung programmes, international jobs, study abroad options,
-            German training and guided career support based on your country,
-            qualification, language level and target destination.
+            @if (mode === 'employer') {
+              Source qualified candidates, Ausbildung trainees and international workforce
+              with structured screening, documentation, language readiness and mobility support.
+            } @else {
+              Explore Ausbildung programmes, international jobs, study abroad options,
+              German training and guided career support based on your country,
+              qualification
+            }
           </p>
 
           <!-- CTA Buttons -->
@@ -81,8 +89,6 @@ import { CommonModule } from '@angular/common';
             </button>
           </div>
 
-         
-
         </div>
 
         <!-- Right Visual -->
@@ -103,12 +109,12 @@ import { CommonModule } from '@angular/common';
               <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
 
               <div class="absolute left-5 top-5 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#0f62fe]">
-                Ausbildung Germany
+                {{ mode === 'employer' ? 'Talent Pipeline' : 'Ausbildung Germany' }}
               </div>
 
               <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
                 <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/70">
-                  Pathway sectors
+                  {{ mode === 'employer' ? 'Recruitment sectors' : 'Pathway sectors' }}
                 </p>
 
                 <h3 class="mt-3 max-w-[440px] text-[30px] font-normal leading-tight tracking-[-0.05em]">
@@ -118,13 +124,17 @@ import { CommonModule } from '@angular/common';
             </div>
 
             <!-- Floating IBM Card -->
-            <div class="absolute -bottom-6 left-5 hidden max-w-[320px] border border-[#c6c6c6] bg-white p-5 shadow-[0_18px_48px_rgba(15,23,42,0.14)] lg:block">
+            <div class="absolute -bottom-6 left-5 hidden max-w-[320px] border border-white/60 bg-white/70 p-5 shadow-[0_18px_48px_rgba(15,23,42,0.14)] backdrop-blur-xl lg:block">
               <p class="section-eyebrow">
-                Guided Journey
+                {{ mode === 'employer' ? 'Workforce Intelligence' : 'Guided Journey' }}
               </p>
 
               <p class="mt-3 text-[18px] font-normal leading-tight tracking-[-0.035em] text-[#161616]">
-                Match eligibility, language readiness, country preference and career outcome.
+                @if (mode === 'employer') {
+                  Build a structured pipeline by sector, language level, readiness and deployment timeline.
+                } @else {
+                  Match eligibility, language readiness, country preference and career outcome.
+                }
               </p>
             </div>
 
@@ -149,24 +159,33 @@ import { CommonModule } from '@angular/common';
     }
 
     .mode-tab {
-      min-height: 46px;
-      background: #ffffff;
+      min-height: 34px;
+      min-width: 118px;
+      border-radius: 999px;
+      background: transparent;
       color: #525252;
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 600;
+      letter-spacing: 0.02em;
       transition:
-        background 0.18s ease,
-        color 0.18s ease;
+        background 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
     }
 
     .mode-tab:hover {
-      background: #edf5ff;
+      background: rgba(255, 255, 255, 0.65);
       color: #0f62fe;
     }
 
     .active-tab {
-      background: #0f62fe !important;
+      background: rgba(15, 98, 254, 0.92) !important;
       color: #ffffff !important;
+      box-shadow:
+        0 8px 22px rgba(15, 98, 254, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+      transform: translateY(-1px);
     }
 
     .primary-btn {
@@ -239,6 +258,12 @@ import { CommonModule } from '@angular/common';
       .primary-btn,
       .secondary-btn {
         width: 100%;
+      }
+
+      .mode-tab {
+        min-width: 104px;
+        min-height: 32px;
+        font-size: 10px;
       }
 
       .metric-box {

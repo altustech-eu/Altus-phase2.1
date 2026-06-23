@@ -80,11 +80,13 @@ interface InstitutionCard {
                 [class.bg-white]="activeCountryId !== tab.id"
                 [class.text-[#161616]]="activeCountryId !== tab.id"
               >
-                <span class="flex h-9 w-9 shrink-0 overflow-hidden border border-[#c6c6c6] bg-white">
+
+                <!-- Circular Country Flag -->
+                <span class="flex h-9 w-9 shrink-0 overflow-hidden rounded-full border border-[#c6c6c6] bg-white shadow-sm">
                   <img
                     [src]="tab.flagUrl"
                     [alt]="tab.country + ' flag'"
-                    class="h-full w-full object-cover"
+                    class="h-full w-full rounded-full object-cover"
                     loading="lazy"
                   />
                 </span>
@@ -159,11 +161,12 @@ interface InstitutionCard {
                 <div class="p-5">
                   <div class="mb-5 flex items-center gap-4">
 
-                    <div class="flex h-13 w-13 shrink-0 items-center justify-center overflow-hidden border border-[#c6c6c6] bg-white">
+                    <!-- Circular Logo / Flag -->
+                    <div class="flex h-13 w-13 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#c6c6c6] bg-white shadow-sm">
                       <img
                         [src]="card.logoUrl"
                         [alt]="card.name + ' logo'"
-                        class="h-full w-full object-contain p-1"
+                        class="h-full w-full rounded-full object-contain p-1"
                         loading="lazy"
                       />
                     </div>

@@ -139,11 +139,12 @@ interface PartnerCard {
                       <div class="flex items-start justify-between gap-3">
                         <div class="flex items-center gap-3">
 
-                          <span class="flex h-9 w-9 shrink-0 overflow-hidden border border-[#c6c6c6] bg-white">
+                          <!-- Circular Flag -->
+                          <span class="flex h-9 w-9 shrink-0 overflow-hidden rounded-full border border-[#c6c6c6] bg-white shadow-sm">
                             <img
                               [src]="country.flagUrl"
                               [alt]="country.name + ' flag'"
-                              class="h-full w-full object-cover"
+                              class="h-full w-full rounded-full object-cover"
                               loading="lazy"
                             />
                           </span>
@@ -216,11 +217,13 @@ interface PartnerCard {
                   </p>
 
                   <div class="mt-3 flex items-center gap-3">
-                    <span class="flex h-10 w-10 overflow-hidden border border-[#c6c6c6] bg-white">
+
+                    <!-- Active Circular Flag -->
+                    <span class="flex h-10 w-10 overflow-hidden rounded-full border border-[#c6c6c6] bg-white shadow-sm">
                       <img
                         [src]="activeCountry.flagUrl"
                         [alt]="activeCountry.name + ' flag'"
-                        class="h-full w-full object-cover"
+                        class="h-full w-full rounded-full object-cover"
                         loading="lazy"
                       />
                     </span>
@@ -261,8 +264,10 @@ interface PartnerCard {
                     [class.opacity-100]="country.continent === activeTab || country.code === activeCountry.code"
                     [class.opacity-30]="country.continent !== activeTab && country.code !== activeCountry.code"
                   >
+
+                    <!-- Circular Map Flag Pin -->
                     <span
-                      class="relative flex h-9 w-9 items-center justify-center overflow-hidden border-2 bg-white shadow-lg transition-all duration-300"
+                      class="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border-2 bg-white shadow-lg transition-all duration-300"
                       [class.border-[#0f62fe]]="activeCountry.code === country.code"
                       [class.scale-125]="activeCountry.code === country.code"
                       [class.border-white]="activeCountry.code !== country.code"
@@ -271,12 +276,12 @@ interface PartnerCard {
                       <img
                         [src]="country.flagUrl"
                         [alt]="country.name + ' flag'"
-                        class="h-full w-full object-cover"
+                        class="h-full w-full rounded-full object-cover"
                         loading="lazy"
                       />
 
                       @if (activeCountry.code === country.code) {
-                        <span class="absolute -inset-2 border border-[#0f62fe]/40 animate-ping"></span>
+                        <span class="absolute -inset-2 rounded-full border border-[#0f62fe]/40 animate-ping"></span>
                       }
                     </span>
 
@@ -290,94 +295,64 @@ interface PartnerCard {
 
               </div>
 
-              <!-- Country Detail + Image Cards -->
-              <div class="relative z-10 grid grid-cols-1 gap-4 p-5 lg:grid-cols-12">
+              <!-- Recommended Pathways Only -->
+              <div class="relative z-10 p-5">
 
-                <!-- Country Intelligence Card -->
-                <div class="border border-white/80 bg-white/90 p-5 backdrop-blur lg:col-span-4">
-                  <p class="section-eyebrow">
-                    Country intelligence
-                  </p>
+                <div class="mb-4 flex items-center justify-between">
+                  <div>
+                    <p class="section-eyebrow">
+                      Recommended pathways
+                    </p>
 
-                  <h4 class="mt-4 text-[24px] font-normal leading-tight tracking-[-0.045em] text-[#161616]">
-                    {{ activeCountry.headline }}
-                  </h4>
-
-                  <p class="mt-4 text-[13px] leading-relaxed text-[#525252]">
-                    {{ activeCountry.description }}
-                  </p>
-
-                  <div class="mt-5 space-y-2">
-                    @for (item of activeCountry.opportunities; track item) {
-                      <div class="flex items-start gap-3 border border-[#e0e0e0] bg-[#f4f4f4] p-3">
-                        <span class="mt-1.5 h-2 w-2 shrink-0 bg-[#0f62fe]"></span>
-
-                        <p class="text-[12px] font-normal leading-relaxed text-[#525252]">
-                          {{ item }}
-                        </p>
-                      </div>
-                    }
+                    <h4 class="mt-2 text-[28px] font-normal leading-tight tracking-[-0.045em] text-[#161616]">
+                      Choose a route for {{ activeCountry.name }}
+                    </h4>
                   </div>
+
+                  <a href="#" class="hidden text-[13px] font-semibold text-[#0f62fe] hover:text-[#0043ce] sm:inline-flex">
+                    View all →
+                  </a>
                 </div>
 
-                <!-- Right Side Three Image Cards -->
-                <div class="lg:col-span-8">
-                  <div class="mb-4 flex items-center justify-between">
-                    <div>
-                      <p class="section-eyebrow">
-                        Recommended pathways
-                      </p>
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                  @for (card of partnerCards; track card.title + $index) {
+                    <article class="image-pathway-card group">
 
-                      <h4 class="mt-2 text-[28px] font-normal leading-tight tracking-[-0.045em] text-[#161616]">
-                        Choose a route for {{ activeCountry.name }}
-                      </h4>
-                    </div>
+                      <img
+                        [src]="card.imageUrl"
+                        [alt]="card.title"
+                        class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
 
-                    <a href="#" class="hidden text-[13px] font-semibold text-[#0f62fe] hover:text-[#0043ce] sm:inline-flex">
-                      View all →
-                    </a>
-                  </div>
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10"></div>
 
-                  <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-                    @for (card of partnerCards; track card.title + $index) {
-                      <article class="image-pathway-card group">
+                      <div class="absolute left-4 top-4 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#0f62fe]">
+                        {{ card.category }}
+                      </div>
 
-                        <img
-                          [src]="card.imageUrl"
-                          [alt]="card.title"
-                          class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                          loading="lazy"
-                        />
+                      <div class="absolute inset-x-0 bottom-0 p-4 text-white">
+                        <h4 class="text-[21px] font-normal leading-tight tracking-[-0.04em]">
+                          {{ card.title }}
+                        </h4>
 
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10"></div>
-
-                        <div class="absolute left-4 top-4 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#0f62fe]">
-                          {{ card.category }}
+                        <div class="mt-3 flex items-center gap-2 text-[11px] font-semibold text-white/80">
+                          <span>{{ card.rating }} rating</span>
+                          <span class="h-1 w-1 bg-white/60"></span>
+                          <span>{{ card.reviews }} reviews</span>
                         </div>
 
-                        <div class="absolute inset-x-0 bottom-0 p-4 text-white">
-                          <h4 class="text-[21px] font-normal leading-tight tracking-[-0.04em]">
-                            {{ card.title }}
-                          </h4>
+                        <p class="mt-3 text-[12px] leading-relaxed text-white/80">
+                          {{ card.description }}
+                        </p>
 
-                          <div class="mt-3 flex items-center gap-2 text-[11px] font-semibold text-white/80">
-                            <span>{{ card.rating }} rating</span>
-                            <span class="h-1 w-1 bg-white/60"></span>
-                            <span>{{ card.reviews }} reviews</span>
-                          </div>
+                        <button class="mt-4 w-full border border-white/40 bg-white/10 px-4 py-2 text-[12px] font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-[#161616]">
+                          Explore pathway
+                        </button>
+                      </div>
 
-                          <p class="mt-3 text-[12px] leading-relaxed text-white/80">
-                            {{ card.description }}
-                          </p>
-
-                          <button class="mt-4 w-full border border-white/40 bg-white/10 px-4 py-2 text-[12px] font-semibold text-white backdrop-blur transition-colors hover:bg-white hover:text-[#161616]">
-                            Explore pathway
-                          </button>
-                        </div>
-
-                      </article>
-                    }
-                  </div>
+                    </article>
+                  }
                 </div>
 
               </div>

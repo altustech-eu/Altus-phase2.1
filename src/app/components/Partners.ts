@@ -12,6 +12,14 @@ interface PartnerTab {
   label: 'Employers' | 'Universities' | 'Institutions' | 'Agents';
 }
 
+interface TabContent {
+  heading: string;
+  description: string;
+  directoryDescription: string;
+  ctaTitle: string;
+  ctaDescription: string;
+}
+
 @Component({
   selector: 'app-partner-logo-section',
   standalone: true,
@@ -25,17 +33,17 @@ interface PartnerTab {
         <div class="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p class="section-eyebrow">
-              Partner Ecosystem
+              AltusCareer Partner Ecosystem
             </p>
 
             <h2 class="mt-3 max-w-[760px] text-[34px] font-normal leading-[1.06] tracking-[-0.055em] text-[#161616] lg:text-[48px]">
-              Partners for employers, universities, institutions and agents
+              Partners for Ausbildung, jobs, study abroad and German training
             </h2>
           </div>
 
           <p class="max-w-[520px] text-[14px] leading-relaxed text-[#525252]">
-            Manage strategic relationships across hiring partners, university networks,
-            training institutions, agents and regional business development channels.
+            AltusCareer builds trusted partner networks across employers, universities,
+            training institutions, schools, agents and regional business development channels.
           </p>
         </div>
 
@@ -63,13 +71,11 @@ interface PartnerTab {
             </p>
 
             <h3 class="mt-3 text-[30px] font-normal leading-[1.08] tracking-[-0.05em] text-[#161616] lg:text-[42px]">
-              Career360 partner network
+              {{ activeContent.heading }}
             </h3>
 
             <p class="mt-4 max-w-[560px] text-[14px] leading-relaxed text-[#525252]">
-              A structured partner ecosystem supports Ausbildung, international jobs,
-              study abroad, German language training, employer recruitment, school tie-ups
-              and institutional growth.
+              {{ activeContent.description }}
             </p>
 
             <div class="mt-6 grid grid-cols-2 gap-3">
@@ -88,7 +94,7 @@ interface PartnerTab {
               href="#"
               class="mt-6 inline-flex items-center gap-3 text-[13px] font-semibold text-[#0f62fe] transition-colors hover:text-[#0043ce]"
             >
-              Learn partner programmes
+              Learn AltusCareer partner programmes
               <span class="text-[18px] leading-none">→</span>
             </a>
           </div>
@@ -107,7 +113,7 @@ interface PartnerTab {
               </div>
 
               <p class="max-w-[420px] text-[13px] leading-relaxed text-[#525252]">
-                Display verified partners, category, relationship type and activation status.
+                {{ activeContent.directoryDescription }}
               </p>
             </div>
 
@@ -148,12 +154,11 @@ interface PartnerTab {
             </p>
 
             <h4 class="mt-3 text-[28px] font-normal leading-tight tracking-[-0.045em] text-[#161616]">
-              Become a Career360 partner
+              {{ activeContent.ctaTitle }}
             </h4>
 
             <p class="mt-3 max-w-[720px] text-[14px] leading-relaxed text-[#525252]">
-              Partner for Ausbildung programmes, international jobs, study abroad options,
-              German training, employer recruitment and country-specific career support.
+              {{ activeContent.ctaDescription }}
             </p>
           </div>
 
@@ -353,92 +358,208 @@ export class PartnerLogoSectionComponent {
     { label: 'Agents' }
   ];
 
+  tabContent: Record<PartnerTab['label'], TabContent> = {
+    Employers: {
+      heading: 'AltusCareer employer hiring network',
+      description:
+        'AltusCareer connects employers and recruitment partners with screened candidates for Ausbildung, healthcare, hospitality, IT, logistics, retail and skilled workforce pathways.',
+      directoryDescription:
+        'Display employer partners, sector hiring networks, workforce channels and recruitment collaborators.',
+      ctaTitle: 'Become an AltusCareer employer partner',
+      ctaDescription:
+        'Partner with AltusCareer to access trained, documented and career-ready candidates for Germany, Europe and Gulf workforce requirements.'
+    },
+    Universities: {
+      heading: 'AltusCareer study abroad university network',
+      description:
+        'AltusCareer supports students with university discovery, course comparison, admission guidance, documentation, visa readiness and study abroad counselling.',
+      directoryDescription:
+        'Display universities, study abroad partners, pathway providers and higher education networks.',
+      ctaTitle: 'Become an AltusCareer university partner',
+      ctaDescription:
+        'Partner with AltusCareer to reach qualified students for undergraduate, postgraduate, medicine, pathway and employability-linked study abroad programmes.'
+    },
+    Institutions: {
+      heading: 'AltusCareer school and training institution network',
+      description:
+        'AltusCareer works with schools, colleges, coaching centres, German language academies and training institutions for awareness, counselling, language training and documentation support.',
+      directoryDescription:
+        'Display schools, training centres, language academies, counselling centres and institutional feeder partners.',
+      ctaTitle: 'Become an AltusCareer institution partner',
+      ctaDescription:
+        'Partner with AltusCareer for German language training, Ausbildung awareness, school seminars, student counselling and local centre activation.'
+    },
+    Agents: {
+      heading: 'AltusCareer agent and channel partner network',
+      description:
+        'AltusCareer works with agents, franchise partners, freelance counsellors, student ambassadors, parent referral partners and regional BDMs to scale ethical candidate sourcing.',
+      directoryDescription:
+        'Display agents, franchise channels, student ambassadors, referral partners and regional business development partners.',
+      ctaTitle: 'Become an AltusCareer channel partner',
+      ctaDescription:
+        'Become a channel partner for Ausbildung, jobs, study abroad, German training and Gulf-Europe career mobility pathways.'
+    }
+  };
+
   partners: PartnerLogo[] = [
     {
-      id: 'p1',
-      name: 'Altus Career',
+      id: 'emp-1',
+      name: 'AltusCareer Employer Desk',
       short: 'AC',
       category: 'Employers'
     },
     {
-      id: 'p2',
-      name: 'EU Talent Group',
-      short: 'ET',
+      id: 'emp-2',
+      name: 'euRecruiter Network',
+      short: 'ER',
       category: 'Employers'
     },
     {
-      id: 'p3',
-      name: 'The Future Law',
-      short: 'FL',
+      id: 'emp-3',
+      name: 'Healthcare Hiring Desk',
+      short: 'HH',
       category: 'Employers'
     },
     {
-      id: 'p4',
-      name: 'UPES Global',
-      short: 'UG',
+      id: 'emp-4',
+      name: 'Hospitality Talent Desk',
+      short: 'HT',
+      category: 'Employers'
+    },
+    {
+      id: 'emp-5',
+      name: 'Logistics Workforce Desk',
+      short: 'LW',
+      category: 'Employers'
+    },
+    {
+      id: 'emp-6',
+      name: 'IT Career Desk',
+      short: 'IT',
+      category: 'Employers'
+    },
+
+    {
+      id: 'uni-1',
+      name: 'myUniApply',
+      short: 'MUA',
       category: 'Universities'
     },
     {
-      id: 'p5',
-      name: 'German Academy',
-      short: 'GA',
-      category: 'Institutions'
-    },
-    {
-      id: 'p6',
-      name: 'University Connect',
-      short: 'UC',
+      id: 'uni-2',
+      name: 'myUniAssist',
+      short: 'MUS',
       category: 'Universities'
     },
     {
-      id: 'p7',
-      name: 'Career360 Group',
-      short: 'C360',
-      category: 'Employers'
+      id: 'uni-3',
+      name: 'Study-Medicine.eu',
+      short: 'SM',
+      category: 'Universities'
     },
     {
-      id: 'p8',
-      name: 'International School',
-      short: 'IS',
+      id: 'uni-4',
+      name: 'German Public University Desk',
+      short: 'GPU',
+      category: 'Universities'
+    },
+    {
+      id: 'uni-5',
+      name: 'Applied Sciences Desk',
+      short: 'AS',
+      category: 'Universities'
+    },
+    {
+      id: 'uni-6',
+      name: 'Study Abroad Pathway Desk',
+      short: 'SAP',
+      category: 'Universities'
+    },
+
+    {
+      id: 'ins-1',
+      name: 'Career360 Academy',
+      short: 'CA',
       category: 'Institutions'
     },
     {
-      id: 'p9',
-      name: 'UAE Future Jobs',
-      short: 'UFJ',
-      category: 'Agents'
-    },
-    {
-      id: 'p10',
-      name: 'Global Recruiters',
-      short: 'GR',
-      category: 'Agents'
-    },
-    {
-      id: 'p11',
-      name: 'Medica Careers',
-      short: 'MC',
-      category: 'Employers'
-    },
-    {
-      id: 'p12',
-      name: 'Peak Academy',
-      short: 'PA',
+      id: 'ins-2',
+      name: 'AltusCareer Counselling Centres',
+      short: 'CC',
       category: 'Institutions'
+    },
+    {
+      id: 'ins-3',
+      name: 'German Language Training Desk',
+      short: 'GL',
+      category: 'Institutions'
+    },
+    {
+      id: 'ins-4',
+      name: 'School Partnership Desk',
+      short: 'SP',
+      category: 'Institutions'
+    },
+    {
+      id: 'ins-5',
+      name: 'College Seminar Network',
+      short: 'CS',
+      category: 'Institutions'
+    },
+    {
+      id: 'ins-6',
+      name: 'Documentation Support Centres',
+      short: 'DS',
+      category: 'Institutions'
+    },
+
+    {
+      id: 'agt-1',
+      name: 'AltusCareer Franchise Partners',
+      short: 'AF',
+      category: 'Agents'
+    },
+    {
+      id: 'agt-2',
+      name: 'Regional BDM Network',
+      short: 'BDM',
+      category: 'Agents'
+    },
+    {
+      id: 'agt-3',
+      name: 'Student Ambassador Network',
+      short: 'SA',
+      category: 'Agents'
+    },
+    {
+      id: 'agt-4',
+      name: 'Freelance Career Advisors',
+      short: 'FA',
+      category: 'Agents'
+    },
+    {
+      id: 'agt-5',
+      name: 'Parent Referral Partners',
+      short: 'PR',
+      category: 'Agents'
+    },
+    {
+      id: 'agt-6',
+      name: 'Placement Officer Network',
+      short: 'PO',
+      category: 'Agents'
     }
   ];
+
+  get activeContent(): TabContent {
+    return this.tabContent[this.activeTab];
+  }
 
   setTab(tab: PartnerTab['label']) {
     this.activeTab = tab;
   }
 
   filteredPartners() {
-    const filtered = this.partners.filter(partner => partner.category === this.activeTab);
-
-    if (filtered.length >= 6) {
-      return filtered;
-    }
-
-    return this.partners.slice(0, 12);
+    return this.partners.filter(partner => partner.category === this.activeTab);
   }
 }
