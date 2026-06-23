@@ -28,8 +28,6 @@ interface ServiceCard {
   template: `
     <section class="font-main bg-white text-[#161616]">
 
-    
-
       <!-- 02 Country / Ambassador Carousel -->
       <div class="border-b border-[#e0e0e0] bg-[#f4f4f4]">
         <div class="mx-auto max-w-[1584px] px-6 py-16 lg:px-12 xl:px-16 2xl:px-20">
@@ -103,11 +101,12 @@ interface ServiceCard {
                     <div class="p-5">
                       <div class="flex items-start gap-4">
 
-                        <div class="h-[54px] w-[54px] shrink-0 overflow-hidden border-[3px] border-white bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
+                        <!-- Circular Flag Avatar -->
+                        <div class="h-[54px] w-[54px] shrink-0 overflow-hidden rounded-full border-[3px] border-white bg-white shadow-[0_8px_24px_rgba(0,0,0,0.12)]">
                           <img
                             [src]="post.flagUrl"
                             [alt]="post.countryName + ' flag'"
-                            class="h-full w-full object-cover"
+                            class="h-full w-full rounded-full object-cover"
                             loading="lazy"
                             (error)="imageError($event, post.flagUrl)"
                           />

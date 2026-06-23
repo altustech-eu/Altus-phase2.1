@@ -54,7 +54,7 @@ interface TrainingCard {
                   <div class="destination-box">
                     <p class="destination-label">Europe</p>
 
-                    <div class="mt-4 flex h-10 w-10 items-center justify-center bg-[#003399] text-[#ffcc00]">
+                    <div class="mt-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#003399] text-[#ffcc00]">
                       <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7.4-6.3-4.8-6.3 4.8 2.3-7.4-6-4.6h7.6z"/>
                       </svg>
@@ -68,7 +68,7 @@ interface TrainingCard {
                   <div class="destination-box">
                     <p class="destination-label">Germany</p>
 
-                    <div class="mt-4 h-10 w-10 overflow-hidden border border-white/30">
+                    <div class="mt-4 h-10 w-10 overflow-hidden rounded-full border border-white/30">
                       <div class="h-1/3 bg-black"></div>
                       <div class="h-1/3 bg-[#dd0000]"></div>
                       <div class="h-1/3 bg-[#ffce00]"></div>
@@ -82,7 +82,7 @@ interface TrainingCard {
                   <div class="destination-box border-r-0">
                     <p class="destination-label">Gulf</p>
 
-                    <div class="mt-4 flex h-10 w-10 items-center justify-center bg-[#007a3d] text-white">
+                    <div class="mt-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#007a3d] text-white">
                       <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                       </svg>

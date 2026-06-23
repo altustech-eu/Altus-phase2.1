@@ -8,16 +8,6 @@ import { CommonModule } from '@angular/common';
   template: `
     <section class="font-main relative overflow-hidden bg-white text-[#161616]">
 
-      <!-- IBM Grid Background -->
-      <div class="pointer-events-none absolute inset-0 opacity-[0.55]">
-        <div class="absolute bottom-0 top-0 left-[8%] border-l border-[#e0e0e0]"></div>
-        <div class="absolute bottom-0 top-0 left-[24%] border-l border-[#e0e0e0]"></div>
-        <div class="absolute bottom-0 top-0 left-[40%] border-l border-[#e0e0e0]"></div>
-        <div class="absolute bottom-0 top-0 left-[56%] border-l border-[#e0e0e0]"></div>
-        <div class="absolute bottom-0 top-0 left-[72%] border-l border-[#e0e0e0]"></div>
-        <div class="absolute bottom-0 top-0 left-[88%] border-l border-[#e0e0e0]"></div>
-      </div>
-
       <!-- Soft Blue Glass Background Glow -->
       <div class="pointer-events-none absolute left-8 top-16 h-[180px] w-[180px] rounded-full bg-[#0f62fe]/10 blur-3xl"></div>
 
@@ -110,16 +100,6 @@ import { CommonModule } from '@angular/common';
 
               <div class="absolute left-5 top-5 bg-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#0f62fe]">
                 {{ mode === 'employer' ? 'Talent Pipeline' : 'Ausbildung Germany' }}
-              </div>
-
-              <div class="absolute bottom-0 left-0 right-0 p-5 text-white">
-                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/70">
-                  {{ mode === 'employer' ? 'Recruitment sectors' : 'Pathway sectors' }}
-                </p>
-
-                <h3 class="mt-3 max-w-[440px] text-[30px] font-normal leading-tight tracking-[-0.05em]">
-                  Healthcare, IT, Hospitality, Retail, Culinary and Logistics
-                </h3>
               </div>
             </div>
 
@@ -278,4 +258,4 @@ export class HeroComponent {
   setMode(selectedMode: 'employer' | 'employee'): void {
     this.mode = selectedMode;
   }
-}
+} 
